@@ -1,25 +1,55 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View } from 'react-native';
+import { useState } from 'react';
+import { View } from 'react-native';
+
 import Header from './src/components/Header';
 import Search from './src/components/Search';
-import ItemCategory from './src/components/ItemCategory';
+import Categories from './src/components/Categories';
 
 export default function App() {
+
+  const [term, setTerm] = useState("Burger");
+  const [commonCategories] = useState([
+    {
+      name: "Burger",
+      img: require("./src/assets/burger.png"),
+    },
+    {
+      name: "Pizza",
+      img: require("./src/assets/pizza.png"),
+    },
+    {
+      name: "Dessert",
+      img: require("./src/assets/cake.png"),
+    },
+    {
+      name: "Drinks",
+      img: require("./src/assets/smoothies.png"),
+    },
+    {
+      name: "Steak",
+      img: require("./src/assets/steak.png"),
+    },
+    {
+      name: "Pasta",
+      img: require("./src/assets/pasta.png"),
+    },
+  ]);
+
+
   return (
-    <View style={styles.container}>
+    <View>
       <Header />
-      <Search />
-      <ItemCategory />
+      <Search setTerm={setTerm} />
+
+      <Categories
+        commonCategories={commonCategories}
+        setTerm={setTerm}
+        term={term}
+      />
+
       <StatusBar />
     </View>
   )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    // flex: 1,
-    // backgroundColor: '#fff',
-    // alignItems: 'center',
-    // justifyContent: 'center',
-  },
-});

@@ -1,12 +1,25 @@
+import { useState } from 'react';
 import { TextInput, View, StyleSheet } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { elevation } from '../common/styles';
 
-export default function Search() {
+export default function Search({ setTerm }) {
+
+  const [input, setInput] = useState("")
+
   return (
     <View style={[styles.container, styles.elevation]}>
       <FontAwesome5 name="search" size={24} color="black" />
-      <TextInput style={styles.input} placeholder='Restaurants, food' />
+      <TextInput
+        style={styles.input}
+        placeholder='Restaurants, food'
+        value={input}
+        onChangeText={text => setInput(text)}
+        onEndEditing={() => {
+          if (input) setTerm(input);
+          setInput("");
+        }}
+      />
     </View>
   )
 }

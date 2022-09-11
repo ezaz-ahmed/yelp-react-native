@@ -1,33 +1,45 @@
-import { Text, View, StyleSheet, Image } from 'react-native';
-import { elevation } from '../common/styles'
+import React from "react";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-export default function ItemCategory() {
+export default function ItemCategory({
+  index,
+  category,
+  active,
+  onPressCategoryItem,
+}) {
   return (
-    <View style={[styles.container, styles.elevation]}>
-
-      <View>
-        <Image source={require('../assets/burger.png')} style={styles.image} />
+    <TouchableOpacity onPress={onPressCategoryItem}>
+      <View
+        style={[
+          styles.container,
+          index === 0 ? { marginLeft: 25 } : { marginLeft: 15 },
+          active
+            ? { backgroundColor: "rgb(241,186,87)" }
+            : { backgroundColor: "white" },
+        ]}
+      >
+        <View style={[styles.imageContainer]}>
+          <Image style={styles.image} source={category.img} />
+        </View>
+        <Text style={styles.header}>{category.name}</Text>
       </View>
-
-      <Text style={styles.header}>
-        Burger
-      </Text>
-    </View>
-  )
+    </TouchableOpacity>
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
     width: 70,
     height: 100,
-    borderRadius: 50,
-    backgroundColor: "white",
+    borderRadius: 500,
     alignItems: "center",
     justifyContent: "center",
-    marginVertical: 15,
-    marginHorizontal: 25
+    shadowOffset: { width: 5, height: 5 },
+    shadowColor: "black",
+    shadowOpacity: 0.1,
+    elevation: 3,
+    marginBottom: 7,
   },
-  elevation,
   image: {
     width: 35,
     height: 35,
@@ -44,4 +56,4 @@ const styles = StyleSheet.create({
   header: {
     fontWeight: "bold",
   },
-})
+});
