@@ -1,10 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 
 import Header from './src/components/Header';
 import Search from './src/components/Search';
 import Categories from './src/components/Categories';
+import Restaurants from './src/components/Restaurants';
+import useRestaurants from './src/hooks/useRestaurants';
 
 export default function App() {
 
@@ -36,6 +38,13 @@ export default function App() {
     },
   ]);
 
+  const [{ data, loading, error }, searchResaurants] = useRestaurants(term);
+
+  useEffect(() => {
+    searchResaurants(term);
+  }, [term]);
+
+  console.log(data)
 
   return (
     <View>
@@ -47,6 +56,8 @@ export default function App() {
         setTerm={setTerm}
         term={term}
       />
+
+      <Restaurants data={data} loading={loading} />
 
       <StatusBar />
     </View>
