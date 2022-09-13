@@ -9,7 +9,9 @@ import Restaurants from '../components/Restaurants'
 import Search from '../components/Search'
 
 export default function HomeScreen() {
+
   const [term, setTerm] = useState("");
+
   const [commonCategories] = useState([
     {
       name: "Burger",
@@ -54,7 +56,11 @@ export default function HomeScreen() {
         term={term}
       />
 
-      <Restaurants data={data} loading={loading} error={error} />
+      <Restaurants
+        data={data}
+        loading={loading}
+        error={error}
+      />
 
       <StatusBar />
     </View>

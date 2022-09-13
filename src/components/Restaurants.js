@@ -1,7 +1,10 @@
 import { View, Text, StyleSheet, ActivityIndicator, FlatList, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import RestaurantItem from './RestaurantItem';
 
-export default function Restaurants({ data, loading }) {
+function Restaurants({ data, loading, error }) {
+
+  const navigation = useNavigation();
 
   if (loading) return <ActivityIndicator size="large" marginVertical={30} />;
 
@@ -12,9 +15,9 @@ export default function Restaurants({ data, loading }) {
       <FlatList
         data={data}
         keyExtractor={(restaurant) => restaurant.id}
-        renderItem={({ item, index }) => (
+        renderItem={({ item }) => (
           <TouchableOpacity
-            onPress={() => navigation.navigate("Restaurant", { id: item.id })}
+            onPress={() => navigation.navigate({ name: "Restaurant", params: { id: item.id }, merge: true, })}
           >
             <RestaurantItem restaurant={item} />
           </TouchableOpacity>
@@ -35,3 +38,5 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
   },
 });
+
+export default Restaurants
