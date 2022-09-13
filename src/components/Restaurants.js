@@ -1,22 +1,15 @@
-import {
-  StyleSheet,
-  View,
-  Text,
-  ActivityIndicator,
-  FlatList,
-  TouchableOpacity,
-} from "react-native";
+import { View, Text, StyleSheet, ActivityIndicator, FlatList, TouchableOpacity } from 'react-native';
 import RestaurantItem from './RestaurantItem';
 
-
 export default function Restaurants({ data, loading }) {
-  // if (loading) return <ActivityIndicator size="large" marginVertical={30} />;
+
+  if (loading) return <ActivityIndicator size="large" marginVertical={30} />;
 
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Top Restaurants</Text>
 
-      {/* <FlatList
+      <FlatList
         data={data}
         keyExtractor={(restaurant) => restaurant.id}
         renderItem={({ item, index }) => (
@@ -26,16 +19,15 @@ export default function Restaurants({ data, loading }) {
             <RestaurantItem restaurant={item} />
           </TouchableOpacity>
         )}
-      /> */}
+      />
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   container: {
     marginHorizontal: 25,
     marginVertical: 15,
-    flex: 1,
   },
   header: {
     fontWeight: "bold",
